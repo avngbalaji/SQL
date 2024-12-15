@@ -13,8 +13,6 @@ create table users(
     primary key(id)
 );
 
-select * from students;
-
 show tables;
 describe users;
 
@@ -238,3 +236,39 @@ select id,count(adate) as working from attendance group by id;
 select id, count(adate) as working,
 count(if(astatus='P',1,null)) as present
 from attendance group by id;
+
+select * from attendance where id=3;
+
+-- ----------------------------------------------------------------------------------------------
+
+-- join query
+
+select * from students;
+select * from attendance;
+
+select students.name, attendance.adate, attendance.astatus from students inner join attendance on students.id=attendance.id;
+
+-- ----------------------------------------------------------------------------------------------
+
+-- bus fare
+/*
+salem=100
+namakkal=150
+chennai=300
+hosur=350
+dharmapuri=450
+*/
+
+select name,city,
+(
+	case
+		when city='salem' then 100
+        when city='namakkal' then 150
+        when city='chennai' then 300
+        when city='hosur' then 350
+        when city='Dharmapuri' then 450
+        else 0
+	end
+)
+as amount from students;
+
