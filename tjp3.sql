@@ -125,7 +125,7 @@ inner join marks on students.id=marks.id
 where course.cname='MBA';
 
 
--- displaying only mba pass students
+-- (Having) displaying only mba pass students 
 select students.NAME,students.ROLLNO,course.cname as COURSE,marks.M1,marks.M2,marks.M3,
 (marks.m1+marks.m2+marks.m3) as TOTAL, (round((marks.m1+marks.m2+marks.m3)/3,2)) as AVERAGE,
 case
@@ -202,3 +202,16 @@ select name,course,total from reports where result='pass';
 drop view reports;
 
 -- ----------------------------------------------------------------------------------------------
+-- inner join in update query
+
+use tutorjoes;
+select * from reports;
+select * from students;
+select * from marks;
+
+-- condition : i have to update m1,m2,m3 in marks table but using the rollno in students table
+
+select students.name, students.rollno, marks.m1, marks.m2, marks.m3 from students
+inner join marks on students.id=marks.id;
+
+update marks inner join students on students.id=marks.id set m1=100, m2=100, m3=100 where students.rollno='A1001';
